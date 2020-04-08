@@ -8,15 +8,15 @@ namespace EntityFramework.Utilities
 {
     class ReplaceVisitor : ExpressionVisitor
     {
-        private readonly Expression from, to;
+        private readonly Expression _from, _to;
         public ReplaceVisitor(Expression from, Expression to)
         {
-            this.from = from;
-            this.to = to;
+            this._from = from;
+            this._to = to;
         }
         public override Expression Visit(Expression node)
         {
-            return node == from ? to : base.Visit(node);
+            return node == _from ? _to : base.Visit(node);
         }
     }
 

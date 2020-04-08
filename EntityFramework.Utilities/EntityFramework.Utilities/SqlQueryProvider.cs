@@ -10,10 +10,10 @@ namespace EntityFramework.Utilities
 {
     public class SqlQueryProvider : IQueryProvider
     {
-        public bool CanDelete { get { return true; } }
-        public bool CanUpdate { get { return true; } }
-        public bool CanInsert { get { return true; } }
-        public bool CanBulkUpdate { get { return true; } }
+        public bool CanDelete => true;
+        public bool CanUpdate => true;
+        public bool CanInsert => true;
+        public bool CanBulkUpdate => true;
 
         public string GetDeleteQuery(QueryInformation queryInfo)
         {

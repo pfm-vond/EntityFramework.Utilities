@@ -112,7 +112,7 @@ namespace EntityFramework.Utilities
         /// <param name="db">The context to get the mapping from</param>
         public EfMapping(DbContext db)
         {
-            this.TypeMappings = new Dictionary<Type, TypeMapping>();
+            TypeMappings = new Dictionary<Type, TypeMapping>();
 
             var metadata = ((IObjectContextAdapter)db).ObjectContext.MetadataWorkspace;
 
@@ -145,7 +145,7 @@ namespace EntityFramework.Utilities
                     EntityType = GetClrType(metadata, objectItemCollection, set)
                 };
 
-                this.TypeMappings.Add(typeMapping.EntityType, typeMapping);
+                TypeMappings.Add(typeMapping.EntityType, typeMapping);
 
                 var tableMapping = new TableMapping
                 {

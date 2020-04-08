@@ -60,8 +60,8 @@ namespace EntityFramework.Utilities
 
         public override void Close()
         {
-            this.Enumerator = null;
-            this.Items = null;
+            Enumerator = null;
+            Items = null;
         }
 
         public override int FieldCount
@@ -74,7 +74,7 @@ namespace EntityFramework.Utilities
 
         public override bool HasRows
         {
-            get { return this.Items != null && this.Items.Any(); }
+            get { return Items != null && Items.Any(); }
         }
 
         public override bool IsClosed
@@ -84,18 +84,18 @@ namespace EntityFramework.Utilities
 
         public override bool Read()
         {
-            return this.Enumerator.MoveNext();
+            return Enumerator.MoveNext();
         }
 
         public override int RecordsAffected
         {
-            get { return this.Items.Count(); }
+            get { return Items.Count(); }
         }
 
 
         public override object GetValue(int ordinal)
         {
-            return this.Accessors[ordinal](this.Enumerator.Current);
+            return Accessors[ordinal](Enumerator.Current);
         }
 
         public override int GetOrdinal(string name)

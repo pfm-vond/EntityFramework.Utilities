@@ -28,17 +28,17 @@ namespace EntityFramework.Utilities
 
         public IEnumerator<T> GetEnumerator()
         {
-            return provider.ExecuteEnumerable(this.expression).Cast<T>().GetEnumerator();
+            return provider.ExecuteEnumerable(expression).Cast<T>().GetEnumerator();
         }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
-            return provider.ExecuteEnumerable(this.expression).GetEnumerator();
+            return provider.ExecuteEnumerable(expression).GetEnumerator();
         }
 
         public EFUQueryable<T> Include(IncludeExecuter<T> include)
         {
-            this.includes.Add(include);
+            includes.Add(include);
             return this;
         }
 

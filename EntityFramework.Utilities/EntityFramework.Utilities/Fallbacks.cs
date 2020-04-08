@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using System.Data.Entity.Core.Objects;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace EntityFramework.Utilities
 {
     class Fallbacks
     {
-        internal static void DefaultInsertAll<T>(ObjectContext context, IEnumerable<T> items) where T : class
+        internal static void DefaultInsertAll<T>(
+            ObjectContext context,
+            IEnumerable<T> items,
+            IConfiguration Configuration)
+            where T : class
         {
             if (Configuration.DisableDefaultFallback)
             {
@@ -22,7 +27,11 @@ namespace EntityFramework.Utilities
             context.SaveChanges();
         }
 
-        internal static int DefaultDelete<T>(ObjectContext context, System.Linq.Expressions.Expression<Func<T, bool>> predicate) where T : class
+        internal static int DefaultDelete<T>(
+            ObjectContext context, 
+            Expression<Func<T, bool>> predicate,
+            IConfiguration Configuration)
+            where T : class
         {
             if (Configuration.DisableDefaultFallback)
             {
@@ -39,12 +48,19 @@ namespace EntityFramework.Utilities
         }
 
 
-        internal static int DefaultUpdate<T, TP>(ObjectContext context, System.Linq.Expressions.Expression<Func<T, bool>> predicate, System.Linq.Expressions.Expression<Func<T, TP>> prop, System.Linq.Expressions.Expression<Func<T, TP>> modifier) where T : class
+        internal static int DefaultUpdate<T, TP>(
+            ObjectContext context,
+            Expression<Func<T, bool>> predicate,
+            Expression<Func<T, TP>> prop, 
+            Expression<Func<T, TP>> modifier,
+            IConfiguration Configuration)
+            where T : class
         {
             if (Configuration.DisableDefaultFallback)
             {
                 throw new InvalidOperationException("No provider supporting the Update operation for this datasource was found");
             }
+
             var set = context.CreateObjectSet<T>();
             var items = set.Where(predicate).ToList();
 
